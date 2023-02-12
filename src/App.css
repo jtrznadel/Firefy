@@ -2,6 +2,12 @@
     background-color: orange;
 }
 
+.App{
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
 .loginButton{
     border: 2px solid orange;
     border-radius: 10px;
@@ -18,9 +24,10 @@
 }
  
 .sideBar{
-    width: 280px;
-    max-width: 280px;
+    width: 100%;
     height: 100vh;
+    text-align: center;
+    padding-top: 40px;
 }
 
 .wrapper {
@@ -33,7 +40,7 @@
     position: absolute;
     box-sizing: border-box;
     top:40%;
-    left: 10px;
+    left: 75px;
     transform: translateY(-50%);
     color: grey;
   }
@@ -45,3 +52,50 @@
     border: 2px solid grey;
     border-radius: 10px;
   }
+
+  .box{
+    background: #fff;
+    border-radius: 4px;
+    padding-bottom: 100%;
+  }
+
+  .artistImg{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: 20 20;
+  }
+
+  .trackImg{
+    width: 80px;
+    height: 80px;
+  }
+
+  .artistBox {
+    height: 250px;
+    border-radius: 20px;
+    padding: 20px;
+    background: rgb(228,120,30);
+    background: linear-gradient(90deg, rgba(228,120,30,1) 0%, rgba(252,176,69,1) 49%, rgba(255,208,143,1) 100%);
+  }
+
+
+  .artistName{
+    font-size: 36px;
+    font-weight: bold;
+  }
+
+
+.scrolling-wrapper {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+.card1 {
+      display: inline-block;
+}
+
+.tracksBox{
+    overflow-y: scroll;
+    height: 250px;
+}
