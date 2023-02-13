@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/Firefy/Discover/static/css/main.0a1810e5.css",
-    "main.js": "/Firefy/Discover/static/js/main.bd2bbad1.js",
+    "main.js": "/Firefy/Discover/static/js/main.1a195ba6.js",
     "static/js/787.68fbcbf1.chunk.js": "/Firefy/Discover/static/js/787.68fbcbf1.chunk.js",
     "static/media/flame-bg.svg": "/Firefy/Discover/static/media/flame-bg.039b28952a8ff39d73a7.svg",
     "index.html": "/Firefy/Discover/index.html",
     "main.0a1810e5.css.map": "/Firefy/Discover/static/css/main.0a1810e5.css.map",
-    "main.bd2bbad1.js.map": "/Firefy/Discover/static/js/main.bd2bbad1.js.map",
+    "main.1a195ba6.js.map": "/Firefy/Discover/static/js/main.1a195ba6.js.map",
     "787.68fbcbf1.chunk.js.map": "/Firefy/Discover/static/js/787.68fbcbf1.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.0a1810e5.css",
-    "static/js/main.bd2bbad1.js"
+    "static/js/main.1a195ba6.js"
   ]
 }
