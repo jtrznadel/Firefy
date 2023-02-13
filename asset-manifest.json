@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/Firefy/static/css/main.5f55574a.css",
-    "main.js": "/Firefy/static/js/main.c314fcd7.js",
+    "main.css": "/Firefy/static/css/main.4e1932d9.css",
+    "main.js": "/Firefy/static/js/main.8c79c5b1.js",
     "static/js/787.68fbcbf1.chunk.js": "/Firefy/static/js/787.68fbcbf1.chunk.js",
     "static/media/flame-bg.svg": "/Firefy/static/media/flame-bg.039b28952a8ff39d73a7.svg",
     "index.html": "/Firefy/index.html",
-    "main.5f55574a.css.map": "/Firefy/static/css/main.5f55574a.css.map",
-    "main.c314fcd7.js.map": "/Firefy/static/js/main.c314fcd7.js.map",
+    "main.4e1932d9.css.map": "/Firefy/static/css/main.4e1932d9.css.map",
+    "main.8c79c5b1.js.map": "/Firefy/static/js/main.8c79c5b1.js.map",
     "787.68fbcbf1.chunk.js.map": "/Firefy/static/js/787.68fbcbf1.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.5f55574a.css",
-    "static/js/main.c314fcd7.js"
+    "static/css/main.4e1932d9.css",
+    "static/js/main.8c79c5b1.js"
   ]
 }
