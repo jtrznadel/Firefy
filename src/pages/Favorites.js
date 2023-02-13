@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useState, useEffect } from 'react';
 
 
-export default function Discover(){
+export default function Favorites(){
     const [isTokenPresent, setIsTokenPresent] = useState(false);
     const [favorites, setFavorites] = useState(() => {
         const storedFavorites = localStorage.getItem('selectedIds');

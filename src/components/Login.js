@@ -6,8 +6,8 @@ import '../App.css';
 
 export default function Login() {
     const CLIENT_ID = "aa8201b71f524c6d8f635b29cdaa48b4"
-    const REDIRECT_URI = "https://jtrznadel.github.io/Firefy"
-    //const REDIRECT_URI = "http://localhost:3000"
+    //const REDIRECT_URI = "https://jtrznadel.github.io/Firefy"
+    const REDIRECT_URI = "http://localhost:3000"
     const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize"
     const RESPONSE_TYPE = "token"
   
