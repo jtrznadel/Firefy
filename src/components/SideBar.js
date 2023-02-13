@@ -15,16 +15,28 @@ function SideBar() {
           return storedIds ? JSON.parse(storedIds) : [];
         });
       
-        const handleIconClick = (id) => {
-          let newSelectedIds;
-          if (selectedIds.includes(id)) {
-            newSelectedIds = selectedIds.filter((selectedId) => selectedId !== id);
-          } else {
-            newSelectedIds = [...selectedIds, id];
-          }
-          setSelectedIds(newSelectedIds);
-          localStorage.setItem('selectedIds', JSON.stringify(newSelectedIds));
-        };
+        const itemExists = (item) => {
+            const items = JSON.parse(localStorage.getItem("selectedIds")) || [];
+            return items.some((storedItem) => storedItem.id === item.id)
+                                             
+          };
+        
+          const removeItem = (item) => {
+            const items = JSON.parse(localStorage.getItem("selectedIds")) || [];
+            const updatedItems = items.filter((storedItem) => storedItem.id !== item.id)
+                                                               
+            localStorage.setItem("selectedIds", JSON.stringify(updatedItems));
+          };
+
+          const handleIconClick = (track) => {
+            if (itemExists(track)) {
+              removeItem(track);
+              setSelectedIds(JSON.parse(localStorage.getItem("selectedIds")));
+            } else {
+              setSelectedIds([...selectedIds, track]);
+              localStorage.setItem('selectedIds', JSON.stringify([...selectedIds, track]));
+            }
+          };
 
 
     const searchArtists = async (e) => {
@@ -55,14 +67,17 @@ function SideBar() {
     }
 
     const renderTracks = () => {
+        console.log(searchKey)
         return Object.entries(tracks)?.map(([key, track], i) => {
             let featuring = ''
-            const iconStyle = selectedIds.includes(track.id) ? {color: 'orange' }: {color: 'black'}
-            return <div className='row trackRow'>
+            const url = track.external_urls.spotify ? track.external_urls.spotify : '/'
+            const iconStyle = itemExists(track) ? {color: 'orange' }: {color: 'black'}
+            return <a href={url} target="_blank">
+                <div className='row trackRow' id={key}>
                 <div className='col-md-2'>
                     <img src={track.album.images[0].url} className="trackImg inline-block p-2 cursor-pointer"/>
                 </div>
-                <div className="col-md-8 pt-2">
+                <div className="col-md-7 mt-1">
                 <h5>{track.name}</h5>
                 {track.artists.forEach(element => {
                     featuring += `${element.name}, `
@@ -70,25 +85,30 @@ function SideBar() {
                 {featuring = featuring.slice(0, -2)}
                 
                 </div>
-                <div className={`col-md-1 pt-4 favoriteIcon`} style={iconStyle} onClick={() => handleIconClick(track.id)}>
+                
+                <div className={`col-md-1 pt-4 favoriteIcon`} style={iconStyle} onClick={(e) => {handleIconClick(track); e.preventDefault()}}>
                     <FontAwesomeIcon icon = {faHeart} />
                 </div>
+                
             </div>
+            </a>
         })}
 
     const searchedArtist = !artists.length ? false : artists.at(0)
+    const searchedArtistUrl = searchedArtist ? searchedArtist.external_urls.spotify : '/'
     const renderArtists = () => {
         searchTracks(artistId)
         return Object.entries(artists)?.map(([key, artist], i) => {
+            const url = artist.external_urls.spotify ? artist.external_urls.spotify : '/'
 			return (
+                <a href={url} target="_blank">
                 <div className='card1 text-center hover:scale-105 ease-in-out duration-300' id={key}>
                     <figure id={key}>
-                    {artist.images.length ? <img src={artist.images[0].url} className="artistImg w-[220px] inline-block p-2 cursor-pointer"/> : <div>No image</div>}
-                    <figcaption>{artist.name}</figcaption>
+                    {artist.images.length ? <img src={artist.images[0].url} className="artistImg1 w-[220px] inline-block p-2 cursor-pointer"/> : <div>No image</div>}
+                    <figcaption className="artistsName">{artist.name}</figcaption>
                     </figure>
                 </div>
-
-                    
+                </a>
 			)
 		})
     }
@@ -126,13 +146,14 @@ function SideBar() {
         
           </div>
           <div className="col-md-9">
+        {searchKey ? <div>
             {searchedArtist ?
             <div className='Container'>
                 <div className="row mt-4">
                     
                     <div className="col-md-6">
                     <h2>Najlepszy wynik</h2>
-
+                    <a href={searchedArtistUrl} target="_blank">
                     <div className="artistBox">
                         <div className="row">
                             <div className="col-md-4">
@@ -146,11 +167,11 @@ function SideBar() {
                             </div>
                         </div>
                     </div>
-                
+                    </a>
                     </div>
                     <div className="col-md-6">
                         <h2>Utwory</h2>
-                        <div className="tracksBox overflow-x-hidden">
+                        <div className="tracksBox">
                          {renderTracks()}
                         </div>
                     </div>
@@ -161,7 +182,8 @@ function SideBar() {
                         {renderArtists()}
                     </div>
                 </div>
- :               <h1>Brak danych</h1>}
+ :              <div className='noData text-center'>Zacznij od wyszukania artysty</div>}</div>
+ :             <div className='noData text-center'>Zacznij od wyszukania artysty</div>}
           </div>
         </div>
       </div> 
