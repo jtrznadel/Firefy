@@ -1,14 +1,31 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import  "../App.css";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function SideBar() {
     const [searchKey, setSearchKey] = useState("");
     const [artists, setArtists] = useState("");
     const [tracks, setTracks] = useState("");
-    const [artistId, setArtistId] = useState("");
+    const [artistId, setArtistId] = useState(""); 
+    const [selectedIds, setSelectedIds] = useState(() => {
+          const storedIds = localStorage.getItem('selectedIds');
+          return storedIds ? JSON.parse(storedIds) : [];
+        });
+      
+        const handleIconClick = (id) => {
+          let newSelectedIds;
+          if (selectedIds.includes(id)) {
+            newSelectedIds = selectedIds.filter((selectedId) => selectedId !== id);
+          } else {
+            newSelectedIds = [...selectedIds, id];
+          }
+          setSelectedIds(newSelectedIds);
+          localStorage.setItem('selectedIds', JSON.stringify(newSelectedIds));
+        };
+
 
     const searchArtists = async (e) => {
         e.preventDefault()
@@ -40,25 +57,27 @@ function SideBar() {
     const renderTracks = () => {
         return Object.entries(tracks)?.map(([key, track], i) => {
             let featuring = ''
-            return <div className='row'>
+            const iconStyle = selectedIds.includes(track.id) ? {color: 'orange' }: {color: 'black'}
+            return <div className='row trackRow'>
                 <div className='col-md-2'>
                     <img src={track.album.images[0].url} className="trackImg inline-block p-2 cursor-pointer"/>
                 </div>
-                <div className="col-md-10 pt-3">
+                <div className="col-md-8 pt-2">
                 <h5>{track.name}</h5>
                 {track.artists.forEach(element => {
                     featuring += `${element.name}, `
                 })}
                 {featuring = featuring.slice(0, -2)}
-                <h7>{featuring}</h7>
                 
+                </div>
+                <div className={`col-md-1 pt-4 favoriteIcon`} style={iconStyle} onClick={() => handleIconClick(track.id)}>
+                    <FontAwesomeIcon icon = {faHeart} />
                 </div>
             </div>
         })}
 
     const searchedArtist = !artists.length ? false : artists.at(0)
     const renderArtists = () => {
-        searchArtists()
         searchTracks(artistId)
         return Object.entries(artists)?.map(([key, artist], i) => {
 			return (
@@ -82,11 +101,13 @@ function SideBar() {
         })
     }
 
+    
+
     return ( 
         <div className="container-fluid pl-0 g-0">
         <div className="row">
           <div className="col-md-3">
-          <div className="d-flex flex-column flex-shrink-0 text-orange bg-light sideBar">
+          <div className="d-flex flex-column flex-shrink-0 text-grey bg-light sideBar">
             <ul className="nav nav-pills flex-column mb-auto ">
                 <li className="nav-item">
                 <div className="nav-item wrapper">
@@ -96,14 +117,13 @@ function SideBar() {
                     </form>
                 </div>
                 </li>
-                <li className="nav-item">
-                    <a className="nav-link" aria-current="page" href="/">Home</a>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link link-dark" aria-current="page" href="/">Favorites</a>
-                </li>
             </ul>
+            <div className='mb-2 '>
+            <hr/>
+            <p>© 2023 Jakub Trznadel</p>
         </div>
+        </div>
+        
           </div>
           <div className="col-md-9">
             {searchedArtist ?
@@ -128,9 +148,9 @@ function SideBar() {
                     </div>
                 
                     </div>
-                    <div class="col-md-6">
+                    <div className="col-md-6">
                         <h2>Utwory</h2>
-                        <div className="tracksBox">
+                        <div className="tracksBox overflow-x-hidden">
                          {renderTracks()}
                         </div>
                     </div>
@@ -141,12 +161,12 @@ function SideBar() {
                         {renderArtists()}
                     </div>
                 </div>
- : <h1>Brak danych</h1>}
+ :               <h1>Brak danych</h1>}
           </div>
         </div>
       </div> 
         
      );
-}
+    }
 
 export default SideBar;

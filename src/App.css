@@ -25,7 +25,7 @@
  
 .sideBar{
     width: 100%;
-    height: 100vh;
+    height: 92vh;
     text-align: center;
     padding-top: 40px;
 }
@@ -75,11 +75,21 @@
     height: 250px;
     border-radius: 20px;
     padding: 20px;
-    background: rgb(228,120,30);
-    background: linear-gradient(90deg, rgba(228,120,30,1) 0%, rgba(252,176,69,1) 49%, rgba(255,208,143,1) 100%);
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    background: linear-gradient(130deg, rgba(228,120,30,1) 0%, rgba(252,176,69,1) 49%, rgba(255,208,143,1) 100%);
+
   }
 
-
+  .artistBox:hover {
+    height: 250px;
+    border-radius: 20px;
+    padding: 20px;
+    cursor: pointer;
+    scale: 105%;
+    opacity: 80%;
+    transition: all 1s ease-in-out;
+  }
   .artistName{
     font-size: 36px;
     font-weight: bold;
@@ -98,4 +108,53 @@
 .tracksBox{
     overflow-y: scroll;
     height: 250px;
+    margin: auto;
+    text-align: start;
+    padding-top: 0;
+}
+
+.favoriteIcon{
+    font-size: 22px;
+    color: black;
+    transition: all 0.5s ease-in-out;
+}
+
+.favoriteIcon:hover{
+    cursor: pointer;
+    scale: 105%;
+    color: orange;
+}
+
+.iconBox{
+    vertical-align: middle;
+    font-size: 22px;
+}
+
+.trackRow{
+    margin-top: 1px;
+    border-bottom: 1px solid lightgrey;
+}
+
+.hrStyled{
+    width: 80%;
+}
+
+.welcomeContainer{
+    height: 92vh;
+    width: 100vw;
+    position: relative;
+    overflow-y: hidden;
+}
+.welcomeContainer:after {
+    content:'';
+    background: url(./assets/flame-bg.svg) no-repeat center;
+    background-size: 100%;
+    position: absolute;
+    bottom: -100px;
+    right: -250px;
+    width:90%;
+    height:100%;
+    z-index:-1;
+    opacity: 0.6;
+    transform: rotate(-25deg);
 }

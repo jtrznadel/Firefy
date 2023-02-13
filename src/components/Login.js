@@ -28,6 +28,7 @@ export default function Login() {
     const logout = () => {
       setToken("")
       window.localStorage.removeItem("token")
+      window.location.reload();
     }
 
   return (

@@ -1,18 +1,23 @@
 import "bootstrap/dist/css/bootstrap.min.css"
-import Container from 'react-bootstrap/Container'
-import NavBar from "./components/NavBar";
-import SideBar from "./components/SideBar";
 import "./App.css";
-
+import Discover from "./pages/Discover";
+import Favorites from "./pages/Favorites";
+import {Route, Routes} from "react-router-dom";
+import NavBar from "./components/NavBar";
 
 
 function App() {
 
   return (
-    <div className="App">
-      <NavBar />
-      <SideBar />
+    <>
+    <NavBar />
+    <div className="containerMain">
+      <Routes>
+        <Route path="/" element={<Discover/>}/>
+        <Route path="/favorites" element={<Favorites/>}/>
+      </Routes>
     </div>
+    </>
   );
 }
 
